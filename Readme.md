@@ -16,19 +16,30 @@ $ component install visionmedia/css-whitespace
 var compile = require('css-whitespace');
 var css = compile('body\n  color: #888\n');
 ```
+or with optional @import importer/resolver (see [examples/import](examples/import))
+```
+var compile = require('css-whitespace');
+var resolver = require('./styl-resolver.js');
+var css = compile('body\n  @import colors\n', { resolver: resolver(__dirname) });
+```
 
 ## Example
 
+```css
+/* main.styl */
+body
+  padding: 50px
+  background: black
+  color: white
+
+```
 ```css
 
 @charset "utf-8"
 
 @import "foo.css"
 
-body
-  padding: 50px
-  background: black
-  color: white
+@import main
 
 form
   button
@@ -51,6 +62,7 @@ yields:
 
 @import "foo.css";
 
+/* main.styl */
 body {
   padding: 50px;
   background: black;
